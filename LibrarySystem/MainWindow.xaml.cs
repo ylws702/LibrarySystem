@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,24 @@ namespace LibrarySystem
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Login(object sender, RoutedEventArgs e)
+        {
+
+        }
+        [DllImport("IO.dll")]
+        extern static bool RootLogin(String password);
+        private void RootLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RootLogin(RootPasswordBox.Password))
+            {
+                MessageBox.Show("Succeed!");
+            }
+            else
+            {
+                MessageBox.Show("failed!");
+            }
         }
     }
 }

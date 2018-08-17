@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibrarySystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="欢迎使用图书管理系统" Height="450" Width="800"
+        MinWidth="640"
+        MinHeight="360">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Margin" Value="0,8,0,16"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Margin" Value="0,8,0,16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Width" Value="40"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="12">
+        <TabControl Name="MainTabControl">
+            <TabItem Header="普通用户登录">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="用户编号：" />
+                    <TextBox/>
+                    <TextBlock Text="密码："/>
+                    <PasswordBox/>
+                    <Button Name="UserLoginButton" Content="登录"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="图书管理员登录">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="编号："/>
+                    <TextBox/>
+                    <TextBlock Text="用户名："/>
+                    <TextBox/>
+                    <TextBlock Text="密码："/>
+                    <PasswordBox/>
+                    <Button Content="登录"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="系统管理员登录">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="密码："/>
+                    <PasswordBox Name="RootPasswordBox"/>
+                    <Button Name="RootLoginButton" Content="登录" Click="RootLoginButton_Click"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
