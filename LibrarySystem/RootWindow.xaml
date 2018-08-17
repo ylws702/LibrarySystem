@@ -1,0 +1,56 @@
+﻿<Window x:Class="LibrarySystem.RootWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibrarySystem"
+        mc:Ignorable="d"
+        Title="欢迎使用图书管理系统"
+        Height="450" Width="800"
+        MinWidth="640"
+        MinHeight="360"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Margin" Value="0,8,0,16"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Margin" Value="0,8,0,16"/>
+            <Setter Property="MaxLength" Value="31"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Width" Value="60"/>
+        </Style>
+    </Window.Resources>
+    <TabControl Margin="12">
+        <TabItem Header="添加图书管理员">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="用户名：" />
+                <TextBox Name="NewAdminTextBox" MaxLength="31"/>
+                <TextBlock Text="密码："/>
+                <PasswordBox Name="NewAdminPasswordBox" MaxLength="31"/>
+                <Button Name="AddAdminButton" Content="保存修改" Click="AddAdminButton_Click"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="删除图书管理员">
+
+        </TabItem>
+        <TabItem Header="查找图书管理员">
+
+        </TabItem>
+        <TabItem Header="更改密码">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="旧密码：" />
+                <PasswordBox Name="OldPasswordBox" MaxLength="31"/>
+                <TextBlock Text="新密码："/>
+                <PasswordBox Name="NewPasswordBox" MaxLength="31"/>
+                <TextBlock Text="新密码确认："/>
+                <PasswordBox Name="NewPasswordBox2" MaxLength="31"/>
+                <Button Name="ChangePasswordButton" Content="保存修改" Click="ChangePasswordButton_Click"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace LibrarySystem
 {
+    using ID = UInt64;
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
@@ -25,23 +26,69 @@ namespace LibrarySystem
         {
             InitializeComponent();
         }
-
-        private void Login(object sender, RoutedEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
-
+            if (e.Key == Key.Enter)
+            { 
+                TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Next);
+                if (Keyboard.FocusedElement is UIElement elementWithFocus)
+                {
+                    elementWithFocus.MoveFocus(request);
+                }
+                e.Handled = true;
+            }
+            base.OnKeyDown(e);
         }
         [DllImport("IO.dll")]
-        extern static bool RootLogin(String password);
-        private void RootLoginButton_Click(object sender, RoutedEventArgs e)
+        extern static bool AdminLogin(ID id, string name, string password);
+        private void AdminLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (RootLogin(RootPasswordBox.Password))
+            if (0 == AdminIDTextBox.Text.Length)
+            {
+                MessageBox.Show("请输入编号!");
+                return;
+            }
+            ID id = Convert.ToUInt64(AdminIDTextBox.Text);
+            string name=AdminNameTextBox.Text;
+            string password=AdminPasswordBox.Password;
+            if (0 == name.Length)
+            {
+                MessageBox.Show("请输入用户名!");
+                return;
+            }
+            if (0 == password.Length)
+            {
+                MessageBox.Show("请输入密码!");
+                return;
+            }
+            if (AdminLogin(id,name,password))
             {
                 MessageBox.Show("Succeed!");
             }
             else
             {
-                MessageBox.Show("failed!");
+                MessageBox.Show("密码错误!");
             }
+        }
+        [DllImport("IO.dll")]
+        extern static bool RootLogin(string password);
+        private void RootLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RootLogin(RootPasswordBox.Password))
+            {
+                RootWindow rootWindow = new RootWindow(RootPasswordBox.Password);
+                rootWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("密码错误!");
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //MessageBox.Show("谢谢使用!");
         }
     }
 }
